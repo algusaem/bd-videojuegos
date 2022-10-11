@@ -9,6 +9,7 @@ import { APIResponse, Game } from '../models';
   providedIn: 'root'
 })
 export class HttpService {
+  public apikey: string = "b91fd40f1a8f4e1d9e84efb928621f57";
 
   constructor(private http: HttpClient) { }
 
@@ -22,18 +23,18 @@ export class HttpService {
       params = new HttpParams().set('ordering', ordering).set('search', search);
     }
 
-    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games?key=b91fd40f1a8f4e1d9e84efb928621f57`, {
+    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games?key=`+ this.apikey, {
       params: params,
     });
   }
 
   getGameDetails(id: string): Observable<Game> {
-    const gameInfoRequest = this.http.get(`${env.BASE_URL}/games/${id}?key=b91fd40f1a8f4e1d9e84efb928621f57`);
+    const gameInfoRequest = this.http.get(`${env.BASE_URL}/games/${id}?key=`+ this.apikey);
     const gameTrailersRequest = this.http.get(
-      `${env.BASE_URL}/games/${id}/movies?key=b91fd40f1a8f4e1d9e84efb928621f57`
+      `${env.BASE_URL}/games/${id}/movies?key=`+ this.apikey
     );
     const gameScreenshotsRequest = this.http.get(
-      `${env.BASE_URL}/games/${id}/screenshots?key=b91fd40f1a8f4e1d9e84efb928621f57`
+      `${env.BASE_URL}/games/${id}/screenshots?key=`+ this.apikey
     );
 
     return forkJoin({
