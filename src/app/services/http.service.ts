@@ -22,18 +22,18 @@ export class HttpService {
       params = new HttpParams().set('ordering', ordering).set('search', search);
     }
 
-    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games`, {
+    return this.http.get<APIResponse<Game>>(`${env.BASE_URL}/games?key=b91fd40f1a8f4e1d9e84efb928621f57`, {
       params: params,
     });
   }
 
   getGameDetails(id: string): Observable<Game> {
-    const gameInfoRequest = this.http.get(`${env.BASE_URL}/games/${id}`);
+    const gameInfoRequest = this.http.get(`${env.BASE_URL}/games/${id}?key=b91fd40f1a8f4e1d9e84efb928621f57`);
     const gameTrailersRequest = this.http.get(
-      `${env.BASE_URL}/games/${id}/movies`
+      `${env.BASE_URL}/games/${id}/movies?key=b91fd40f1a8f4e1d9e84efb928621f57`
     );
     const gameScreenshotsRequest = this.http.get(
-      `${env.BASE_URL}/games/${id}/screenshots`
+      `${env.BASE_URL}/games/${id}/screenshots?key=b91fd40f1a8f4e1d9e84efb928621f57`
     );
 
     return forkJoin({
